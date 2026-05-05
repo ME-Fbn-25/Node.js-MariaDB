@@ -1,0 +1,6 @@
+{
+  "name":"Node.js-MariaDB",
+  "dockerComposeFile":"docker-compose.yml",
+  "service":"app", "workspaceFolder":"/workspaces",
+  "customizations":{"vscode":{"extensions":["cweijan.vscode-database-client2"]}}
+}

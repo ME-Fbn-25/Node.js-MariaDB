@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    volumes: ["..:/workspaces:cached"]
+    command: sleep infinity
+
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment: [MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1]
