@@ -14,7 +14,7 @@ const server = createServer((req, res) => {
   const ext = extname(filePath).toLowerCase();
 
   if (!filePath.startsWith(ROOT_DIR)) {
-    res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
+    res.writeHead(403, { "Content-Type": "text/plain" });
     res.end("403 Forbidden");
     return;
   }
