@@ -10,7 +10,7 @@ SELECT * FROM account WHERE open_date = (SELECT MAX(open_data) FROM account);
 -- A2: Return all accounts not opened by "Woburn Branch's Head Teller".
 
 SELECT a.* FROM account a WHERE a.open_emp_id NOT IN (
-  SELECT e.emp_id FROM employee e JOIN branch b ON e.assigned_branch_id = b.branch_id
+  SELECT e.emp_id FROM employee e INNER JOIN branch b ON e.assigned_branch_id = b.branch_id
   WHERE b.name = 'Woburn Branch' AND e.title = 'Head Teller'
 );
 ```
