@@ -1,7 +1,7 @@
 USE SalesOrders;
 
 
--- 1. Display products and the latest date each product was ordered.
+-- 1.1 Display products and the latest date each product was ordered.
 
 SELECT p.ProductName, MAX(o.OrderDate) AS LatestOrderDate FROM Products p
 JOIN Order_Details od ON p.ProductNumber = od.ProductNumber
@@ -16,7 +16,7 @@ SELECT p.ProductName, (
 WHERE EXISTS (SELECT 1 FROM Order_Details od WHERE od.ProductNumber = p.ProductNumber);
 
 
--- 2. List customers who ordered bikes.
+-- 1.2 List customers who ordered bikes.
 
 SELECT DISTINCT c.CustomerID, c.CustFirstName, c.CustLastName FROM Customers c
 JOIN Orders o ON c.CustomerID = o.CustomerID
@@ -41,7 +41,7 @@ SELECT c.* FROM Customers c WHERE EXISTS (
 );
 
 
--- 3. What products have never been ordered?
+-- 1.3 What products have never been ordered?
 
 SELECT p.ProductNumber, p.ProductName FROM Products p
 LEFT JOIN Order_Details od ON p.ProductNumber = od.ProductNumber
@@ -49,3 +49,33 @@ WHERE od.ProductNumber IS NULL;
 
 SELECT p.ProductNumber, p.ProductName FROM Products p
 WHERE p.ProductNumber NOT IN (SELECT od.ProductNumber FROM Order_Details od);
+
+
+-- [OPTIONAL]: Find all customers who purchased both a glove and a helmet in the same order! (Use EXISTS)
+
+SELECT c.* FROM Customers c JOIN Orders o ON c.CustomerID = o.CustomerID
+WHERE EXISTS (
+  SELECT 1 FROM Order_Details od JOIN Products p ON od.ProductNumber = p.ProductNumber
+  WHERE od.OrderNumber = o.OrderNumber AND p.ProductName RLIKE 'glove'
+) AND EXISTS (
+  SELECT 1 FROM Order_Details od JOIN Products p ON od.ProductNumber = p.ProductNumber
+  WHERE od.OrderNumber = o.OrderNumber AND p.ProductName RLIKE 'helmet'
+);
+
+
+-- 1.4 Show all entertainers and the count of each entertainer's engagements.
+
+
+
+
+-- 1.5 List customers who have booked entertainers who play country or country rock.
+
+
+
+
+-- 1.6 Find the entertainers who played engagements for customers Berg or Hallmark.
+
+
+
+
+-- 1.7 Display agents who haven't booked an entertainer.
